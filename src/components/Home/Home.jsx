@@ -1,9 +1,9 @@
-import React from 'react'
-import carousel1 from '../assets/caurosel2.jpg'
-import carousel2 from '../assets/caurosel3.jpg'
-import carousel3 from '../assets/caurosel4.jpg'
-import carousel4 from '../assets/caurosel5.jpg'
-import Products from './Products'
+import React from 'react';
+import carousel1 from '../../assets/caurosel2.jpg';
+import carousel2 from '../../assets/caurosel3.jpg';
+import carousel3 from '../../assets/caurosel4.jpg';
+import carousel4 from '../../assets/caurosel5.jpg';
+import Products from '../Product/Products/Products';
 
 
 const Home = () => {
@@ -47,7 +47,10 @@ const Home = () => {
                         <span className="visually-hidden">Next</span>
                     </button>
                 </div>
+                <div className="Product" style={{padding: '10px'}}>
                 <Products/>
+                </div>
+                
             </div>
         )
     }

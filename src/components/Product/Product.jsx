@@ -5,6 +5,8 @@ import Skeleton from 'react-loading-skeleton';
 
 const Product = () => {
 
+    const [cartItems, setCartItems] = useState([]);
+
     const { id } = useParams();
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -25,18 +27,37 @@ const Product = () => {
                 <div className="col-md-6">
                     <Skeleton height={400} />
                 </div>
-                <div className="col-md-6" style={{lineHeight:2}}>
+                <div className="col-md-6" style={{ lineHeight: 2 }}>
                     <Skeleton height={50} width={300} />
                     <Skeleton height={75} />
                     <Skeleton height={25} width={150} />
                     <Skeleton height={50} />
                     <Skeleton height={150} />
                     <Skeleton height={50} width={100} />
-                    <Skeleton height={50} width={100} style={{marginLeft:6}} />
+                    <Skeleton height={50} width={100} style={{ marginLeft: 6 }} />
                 </div>
             </>
         )
     }
+
+      // HandleAddProduct Start
+      const handleAddProduct = (item) => {
+        const ProductExists = cartItems.find((items) => items.id === item.id);
+        if (ProductExists) {
+            setCartItems(
+                cartItems.map((items) =>
+                    items.id === item.id ?
+                        { ...ProductExists, quantity: ProductExists.quantity + 1 } :
+                        items
+                )
+            );
+        }
+        else {
+            setCartItems([...cartItems, { ...item, quantity: 1 }]);
+        }
+    }
+
+    // HandleAddProduct End
 
     const ShowProduct = () => {
         return (
@@ -61,8 +82,8 @@ const Product = () => {
                     <p className="led">
                         {product.description}
                     </p>
-                    <button className='btn btn-outline-dark px-4 py-2'>Add to Cart</button>
-                    <NavLink  to='/cart'  className="btn btn-dark ms-2 px-3 py-2">Buy Now</NavLink>
+                    <NavLink to='' className='btn btn-outline-dark px-4 py-2' onClick={() => handleAddProduct(cartItems)}>Add to Cart</NavLink>
+                    <NavLink to='/cart' className="btn btn-dark ms-2 px-3 py-2" onClick={() => handleAddProduct(cartItems)}>Buy Now</NavLink>
                 </div>
             </>
         )

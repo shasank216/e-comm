@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 const Products = () => {
 
+    const [cartItems, setCartItems] = useState([]);
+
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState(data);
     const [loading, setLoading] = useState(false);
@@ -54,14 +56,33 @@ const Products = () => {
     }
 
 
+    // HandleAddProduct Start
+    const handleAddProduct = (item) => {
+        const ProductExists = cartItems.find((items) => items.id === item.id);
+        if (ProductExists) {
+            setCartItems(
+                cartItems.map((items) =>
+                    items.id === item.id ?
+                        { ...ProductExists, quantity: ProductExists.quantity + 1 } :
+                        items
+                )
+            );
+        }
+        else {
+            setCartItems([...cartItems, { ...item, quantity: 1 }]);
+        }
+    }
+    // HandleAddProduct End
+
+
     const ShowProducts = () => {
         return (
             <>
                 <div className="buttons d-flex justify-content-center mb-5 pb-5">
                     <button className="btn btn-outline-dark me-2" onClick={() => setFilter(data)} > All </button>
-                    <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("men's clothing") } > Men's Clothing </button>
-                    <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("women's clothing") }> Women's Clothing </button>
-                    <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("jewelery") }> Jwelery </button>
+                    <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("men's clothing")} > Men's Clothing </button>
+                    <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("women's clothing")}> Women's Clothing </button>
+                    <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("jewelery")}> Jwelery </button>
                     <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("electronics")} > Electronic </button>
                 </div>
 
@@ -78,7 +99,7 @@ const Products = () => {
                                         <p className="card-text lead fw-bold">
                                             ${product.price}
                                         </p>
-                                        <NavLink to={`products/${product.id}`} className="btn btn-outline-dark">
+                                        <NavLink to={`products/${product.id}`} className="btn btn-outline-dark" onClick={() => handleAddProduct(cartItems)}>
                                             Buy Now
                                         </NavLink>
                                     </div>
