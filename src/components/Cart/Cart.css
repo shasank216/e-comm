@@ -1,0 +1,13 @@
+.cart-items {
+    padding: 2em;
+}
+
+.cart-items-list {
+    text-align: center;
+}
+
+.cart-items-image {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 2em;
+}

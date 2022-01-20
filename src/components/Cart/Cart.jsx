@@ -1,13 +1,27 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
+import './Cart.css';
 
-const Cart = (product, handleAddProduct) => {
-
+const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
+    // const [loading, setLoading] = useState(false);
 
+
+    // useEffect(() => {
+    //     const getCartItems = async () => {
+    //         setLoading(true);
+    //         const response = await fetch('https://fakestoreapi.com/products');
+    //             setCartItems(await response.json());
+    //             setLoading(false);
+
+    //     }
+    //     getCartItems();
+    // }, []);
 
     return (
         <div className='cart-items'>
             <div className="cart-items-header">
+
+                
 
                 {/* if cart is empty */}
                 {cartItems.length === 0 && (<div className='cart-items-empty'>

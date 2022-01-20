@@ -15,9 +15,9 @@ const App = (handleAddProduct) => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/products" component={Products}  />
-        <Route exact path="/products/:id" component={Product}  />
-        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/products" component={Products} handleAddProduct={handleAddProduct} />
+        <Route exact path="/products/:id" component={Product} handleAddProduct={handleAddProduct} />
+        <Route exact path="/cart" component={Cart} handleAddProduct={handleAddProduct} />
       </Switch>
     </>
   );
